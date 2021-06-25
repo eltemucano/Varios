@@ -1,0 +1,77 @@
+{% extends "base.html" %} {% block titulo %} - Authors{% endblock %}
+<!-- Sección de MARCO de BOOKS -->
+{% block js %}
+    {% if messages %}
+        {% for message in messages %} 
+            toastr["{{message.tags }}"]("{{message}}"); 
+        {% endfor %} 
+    {% endif %}
+{% endblock %} 
+{%block content %}
+<div class="row">
+    <div class="col">
+        <div class="row bg-warning me-1">
+            <h1 class="text-light text-center">Add a author</h1>
+        </div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="row mt-4">
+                <div class="mb-3">
+                    <label for="authorFirstname" class="form-label">First name</label>
+                    <input type="text" class="form-control" id="authorFirstname" name="authorFirstname"
+                        placeholder="Enter author's first name" />
+                </div>
+                <div class="mb-3">
+                    <label for="authorLastname" class="form-label">Last name</label>
+                    <input type="text" class="form-control" id="authorLastname" name="authorLastname"
+                        placeholder="Enter author's last name" />
+                </div>
+                <div class="mb-3">
+                    <label for="authorNotes" class="form-label">Notes</label>
+                    <textarea class="form-control" id="authorNotes" name="authorNotes"
+                        placeholder="Enter author's notes"></textarea>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-warning mt-3 text-light">
+                        Add author
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col">
+        <div class="row bg-warning ms-1">
+            <h1 class="text-light text-center">Author's list</h1>
+        </div>
+        <div class="row mt-4 ms-1">
+            <form action="" method="post">
+                <table class="table table-bordered table-striped table-sm" id="tabla_autores">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ACA EMPIEZA EL CICLO DE MOSTRAR DATOS -->
+                        {% for author in authors_list %}
+                        <tr>
+                            <td>{{author.id}}</td>
+                            <td>{{author.first_name}}</td>
+                            <td>{{author.last_name}}</td>
+                            <td>
+                                <a class="text-warning" href="/authors/{{author.id}}"><i class="fas fa-eye"></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+            <!-- ACA TERMINA EL CICLO DE MOSTRAR DATOS -->
+        </div>
+    </div>
+</div>
+<!-- Fin Sección MARCO de BOOKS-->
+{% endblock %}

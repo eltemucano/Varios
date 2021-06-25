@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Index{% endblock %}
+{% block content %}
+    <!-- Sección de MARCO HERO CENTRADO -->
+    <div class="px-4 py-5 my-5 text-center">
+        <img class="d-block mx-auto mb-4" src="{% static 'images/logo2.svg' %}" alt="" width="120" height="145">
+        <h1 class="display-5 fw-bold">A good place to read and share</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4 mt-4">Since 1966 serving our community with a varied selection of the best national and
+                international books and authors. Welcome to the culture.</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center ">
+                <!-- <button type="button" class="btn btn-warning btn-lg text-light px-4 gap-3">Books</button>
+                <button type="button" class="btn btn-warning btn-lg text-light px-4 gap-3">Authors</button> -->
+                <a class="btn btn-warning btn-lg text-light px-4 gap-3" href="/books" role="button">Books</a>
+                <a class="btn btn-warning btn-lg text-light px-4 gap-3" href="/authors" role="button">Authors</a>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Sección MARCO HERO CENTRADO -->
+{% include 'footer.html' %}
+{% endblock %}

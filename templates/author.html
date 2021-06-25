@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block titulo %} - Authors{% endblock %}
+{% block content %}
+<!-- {% load static %} -->
+<!-- Sección de MARCO de BOOK -->
+    <div class="row">
+        <div class="col">
+            <div class="card" style="width: 20rem;">
+                <img src="{% static 'images/logo2.svg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h4 class="card-title bg-warning p-1 text-center text-light">{{author_firstName}} {{author_lastName}}</h4>
+                    <h5 class="card-subtitle mb-2 text-muted">Id : {{author_id}}</h5>
+                    <span class="card-text text-decoration-underline">Author's notes :</span>
+                    <p class="card-text">{{author_description}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <h4 class="bg-warning p-2 text-center text-light">Books</h4>
+                <ul>
+                    <!-- ACA EMPIEZA LA RUTINA DE MOSTRAR LISTA DE BOOKS DEL AUTOR -->
+                    {% for books in book_list %}
+                    <li>{{books.id}} {{books.title}} {{books.description}}</li>
+                    {% endfor %}
+                    <!-- ACA TERMINA LA RUTINA DE MOSTRAR LISTA DE BOOKS -->
+                </ul>
+            </div>
+            <div class="row">
+                <h4 class="bg-warning p-2 text-center text-light">Actions</h4>
+                <div class="col">
+                    <!-- cargo un dato random para verificar si funciona la RUTA -->
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <!-- HAY QUE PONERLE UN NOMBRE PARA IDENTIFICARLO EN LA VIEW.. WN -->
+                        <select class="form-select mt-2" name="book_selected">
+                            <!-- NO ESTÁ TOMANDO EL VALOR DEL SELECT  -->
+                            {% for book in book_all %}
+                            <option value="{{book.id}}">{{book.id}} {{book.title}} {{book.description}}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="col">
+                            <button class="btn btn-warning mt-3 text-light" type="submit">Add author</button>
+                            <!-- EL ACTION SE EJECUTA DESPUES DEL BOTON SUBMIT?????  -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+<!-- Fin Sección MARCO de BOOK-->
+{% endblock %}

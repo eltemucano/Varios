@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block titulo %} - Books{% endblock %}
+<!-- Sección de MARCO de BOOKS -->
+{% block js %}
+    {% if messages %}
+        {% for message in messages %}
+            toastr["{{ message.tags }}"]("{{message}}");
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <div class="row bg-warning me-1">
+                <h1 class="text-light text-center">Add a book</h1>
+            </div>
+            <form action="" method="POST">
+                {% csrf_token %}
+            <div class="row mt-4">
+                <div class="mb-3">
+                    <label for="bookTitle" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="bookTitle" name="bookTitle" placeholder="Enter book's title">
+                </div>
+                <div class="mb-3">
+                    <label for="bookDescription" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="bookDescription" name="bookDescription" placeholder="Enter book's description">
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-warning mt-3 text-light">Add book</button>
+                </div>
+                
+            </div>
+            </form>
+        </div>
+        <div class="col">
+            <div class="row bg-warning ms-1">
+                <h1 class="text-light text-center">Book's list</h1>
+            </div>
+            <div class="row mt-4 ms-1">
+                <form action="" method="post">
+                <table class="table table-bordered table-striped table-sm" id="tabla_libros">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ACA EMPIEZA EL CICLO DE MOSTRAR DATOS -->
+                        {% for book in book_list %}
+                        <tr>
+                            <td>{{book.id}}</td>
+                            <td>{{book.title}}</td>
+                            <td>{{book.desc}}</td>
+                            <td><a class="text-warning"  href="/books/{{book.id}}"><i class="fas fa-eye"></i></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                </form>
+                        <!-- ACA TERMINA EL CICLO DE MOSTRAR DATOS -->
+                </div>
+            </div>
+        </div>
+<!-- Fin Sección MARCO de BOOKS-->
+{% endblock %}
